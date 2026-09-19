@@ -29,3 +29,6 @@ The complete n8n workflow is available in the JSON file in this repository.
 3. Import the workflow.
 4. Configure your own credentials and API keys.
 5. Execute the workflow.
+   
+## Workflow Screenshot
+![n8n AI Agent Workflow](Screenshot 2026-09-18 161505.png)
