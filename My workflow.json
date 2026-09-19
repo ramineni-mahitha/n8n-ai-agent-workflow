@@ -1,0 +1,2035 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "Project Evaluation",
+        "formDescription": "Industry Oriented Mini Project Evaluation Form \nSRK College of Engineering \nDepartment of CSE(AI&ML)",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Student Name"
+            },
+            {
+              "fieldLabel": "Roll Number"
+            },
+            {
+              "fieldLabel": "Team Number"
+            },
+            {
+              "fieldLabel": "Project Title"
+            },
+            {
+              "fieldLabel": "Review Type",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Review 1"
+                  },
+                  {
+                    "option": "Review 2"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "Review Date",
+              "fieldType": "date"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "f32ca900-fd5c-4934-8f5d-0c121b08045d",
+      "name": "Student & Review Details",
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        -928,
+        0
+      ],
+      "webhookId": "7de503d9-a867-481a-acca-66bf2e27d964",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "evaluation_criteria",
+        "returnAll": true,
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "review_type",
+              "condition": "eq",
+              "keyValue": "={{ $json['Review Type'] }}"
+            }
+          ]
+        }
+      },
+      "id": "0a4f7d17-5c8c-4572-8fda-fa5bc1820fd4",
+      "name": "Get Evaluation Criteria",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        -720,
+        0
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "nDgXUShJQDuI2rzC",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const criteria = $input.all();\n \nreturn [\n  {\n    json: {\n      review_type: criteria[0].json.review_type,\n      criteria: criteria.map(item => ({\n        criterion_id: item.json.criterion_id,\n        criterion_no: item.json.criterion_no,\n        criterion_title: item.json.criterion_title,\n        co: item.json.co,\n        description: item.json.description,\n        max_score: item.json.max_score\n      }))\n    }\n  }\n];"
+      },
+      "id": "a4ccd5e7-6c2e-4cc2-9a49-425415a2e1a7",
+      "name": "Prepare Criteria",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -512,
+        0
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "={{ $('Get Evaluation Criteria').all()[0].json.criterion_title }}",
+              "fieldType": "radio",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "1"
+                  },
+                  {
+                    "option": "2"
+                  },
+                  {
+                    "option": "3"
+                  },
+                  {
+                    "option": "4"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "={{ $('Get Evaluation Criteria').all()[1].json.criterion_title }}",
+              "fieldType": "radio",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "1"
+                  },
+                  {
+                    "option": "2"
+                  },
+                  {
+                    "option": "3"
+                  },
+                  {
+                    "option": "4"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "={{ $('Get Evaluation Criteria').all()[2].json.criterion_title }}",
+              "fieldType": "radio",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "1"
+                  },
+                  {
+                    "option": "2"
+                  },
+                  {
+                    "option": "3"
+                  },
+                  {
+                    "option": "4"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "={{ $('Get Evaluation Criteria').all()[3].json.criterion_title }}",
+              "fieldType": "radio",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "1"
+                  },
+                  {
+                    "option": "2"
+                  },
+                  {
+                    "option": "3"
+                  },
+                  {
+                    "option": "4"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "={{ $('Get Evaluation Criteria').all()[4].json.criterion_title }}",
+              "fieldType": "radio",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "1"
+                  },
+                  {
+                    "option": "2"
+                  },
+                  {
+                    "option": "3"
+                  },
+                  {
+                    "option": "4"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "={{ $('Get Evaluation Criteria').all()[5].json.criterion_title }}",
+              "fieldType": "radio",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "1"
+                  },
+                  {
+                    "option": "2"
+                  },
+                  {
+                    "option": "3"
+                  },
+                  {
+                    "option": "4"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "={{ $('Get Evaluation Criteria').all()[6].json.criterion_title }}",
+              "fieldType": "radio",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "1"
+                  },
+                  {
+                    "option": "2"
+                  },
+                  {
+                    "option": "3"
+                  },
+                  {
+                    "option": "4"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "={{ $('Get Evaluation Criteria').all()[7].json.criterion_title }}",
+              "fieldType": "radio",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "1"
+                  },
+                  {
+                    "option": "2"
+                  },
+                  {
+                    "option": "3"
+                  },
+                  {
+                    "option": "4"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "={{ $('Get Evaluation Criteria').all()[8].json.criterion_title }}",
+              "fieldType": "radio",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "1"
+                  },
+                  {
+                    "option": "2"
+                  },
+                  {
+                    "option": "3"
+                  },
+                  {
+                    "option": "4"
+                  }
+                ]
+              }
+            },
+            {
+              "fieldLabel": "={{ $('Get Evaluation Criteria').all()[9].json.criterion_title }}",
+              "fieldType": "radio",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "1"
+                  },
+                  {
+                    "option": "2"
+                  },
+                  {
+                    "option": "3"
+                  },
+                  {
+                    "option": "4"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "a010ab9e-32d9-4b6f-bfac-f8a3a01875b3",
+      "name": "Evaluation Form",
+      "type": "n8n-nodes-base.form",
+      "typeVersion": 2.5,
+      "position": [
+        -336,
+        0
+      ],
+      "alwaysOutputData": true,
+      "webhookId": "8b07a361-376f-44de-805e-50e7c4b5f658"
+    },
+    {
+      "parameters": {
+        "jsCode": "const scoreForm = $input.first().json;\n \n// Original information from Form 1\nconst originalForm = $('Student & Review Details').first().json;\n \n// Criteria retrieved from Supabase\nconst criteria = $('Get Evaluation Criteria').all();\n \nconst scores = criteria.map((item) => {\n  const criterion = item.json;\n  const selectedValue = scoreForm[criterion.criterion_title];\n \n  const score = selectedValue\n    ? parseInt(String(selectedValue).split(' - ')[0], 10)\n    : null;\n \n  return {\n    criterion_id: criterion.criterion_id,\n    criterion_no: criterion.criterion_no,\n    criterion_title: criterion.criterion_title,\n    co: criterion.co,\n    score: score\n  };\n});\n \n// Calculate Review total\nconst totalMarks = scores.reduce(\n  (total, item) => total + (item.score || 0),\n  0\n);\n \nreturn [\n  {\n    json: {\n      student_name: originalForm[\"Student Name\"],\n      roll_number: originalForm[\"Roll Number\"],\n      team_number: originalForm[\"Team Number\"],\n      project_title: originalForm[\"Project Title\"],\n      review_type: originalForm[\"Review Type\"],\n      review_date: originalForm[\"Review Date\"],\n \n      total_marks: totalMarks,\n      max_marks: 40,\n \n      percentage: Number(((totalMarks / 40) * 100).toFixed(2)),\n \n      scores: scores\n    }\n  }\n];"
+      },
+      "id": "68dda079-3d39-4f1c-91cf-bd96d5308cba",
+      "name": "Prepare Evaluation Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -160,
+        0
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "project_teams",
+        "limit": 1,
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "team_number",
+              "condition": "eq",
+              "keyValue": "={{ $('Prepare Evaluation Result').first().json.team_number }}"
+            }
+          ]
+        }
+      },
+      "id": "41319f87-ce50-4074-a8e5-2340e252fefd",
+      "name": "Find team",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "nDgXUShJQDuI2rzC",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "b0dc3d7c-55b5-4e2a-b9e4-51a77efd92b4",
+              "leftValue": "={{ !!$('Find team').first().json.team_id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "342ca59d-a056-4572-87a7-b3ddc0d564ec",
+      "name": "Team Exists?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        160,
+        0
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "8a2d292f-d246-40d3-9bdb-7e141719a1be",
+              "name": "team_id",
+              "value": "={{ $json.team_id }}",
+              "type": "number"
+            },
+            {
+              "id": "5bc1e061-8f35-490a-83ed-619388f464c2",
+              "name": "team_number",
+              "value": "={{ $json.team_number }}",
+              "type": "string"
+            },
+            {
+              "id": "db542385-f807-4374-93c9-4be105b48aed",
+              "name": "project_title",
+              "value": "={{ $json.project_title  }}",
+              "type": "string"
+            },
+            {
+              "id": "768d0ad2-b981-4395-801c-7cf1ef74063a",
+              "name": "supervisor_id",
+              "value": "={{ $json.supervisor_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "e2ab6893-fed8-4ea7-8611-8f473f85d711",
+      "name": "Use Existing Team",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        352,
+        -128
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "tableId": "project_teams",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "team_number",
+              "fieldValue": "={{ $('Prepare Evaluation Result').first().json.team_number }}"
+            },
+            {
+              "fieldId": "project_title",
+              "fieldValue": "={{ $('Prepare Evaluation Result').first().json.project_title }}"
+            }
+          ]
+        }
+      },
+      "id": "5b26cffd-56c5-4637-b418-201db60f04fa",
+      "name": "Create Team",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        352,
+        96
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "nDgXUShJQDuI2rzC",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "students",
+        "limit": 1,
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "roll_no",
+              "condition": "eq",
+              "keyValue": "={{ $json[\"Roll Number\"] }}"
+            }
+          ]
+        }
+      },
+      "id": "a031a548-e61c-4a3e-821c-e6ee0713d52a",
+      "name": "Find Student",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        736,
+        -208
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "nDgXUShJQDuI2rzC",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "f4ea1a00-b64c-4e7d-9666-4b08113b11d7",
+              "leftValue": "={{ !!$('Find Student').first().json.student_id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "91334c15-0820-452c-984c-7ef42f4480ef",
+      "name": "Student Exists?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        912,
+        0
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "e5ffb5e3-74d8-4a76-bcd6-735441dfeb87",
+              "name": "student_id",
+              "value": "={{ $('Find Student').first().json.student_id }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "6e25fecf-0df6-455d-b50a-c99cf1ae93bc",
+      "name": "Use Existing Student",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        1168,
+        -144
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "tableId": "students",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "student_name",
+              "fieldValue": "={{ $('Student & Review Details').first().json[\"Student Name\"] }}"
+            },
+            {
+              "fieldId": "roll_no",
+              "fieldValue": "={{ $('Student & Review Details').first().json[\"Roll Number\"] }}"
+            }
+          ]
+        }
+      },
+      "id": "416bf9e9-9f62-422d-b679-4f31c47ad766",
+      "name": "Create Student",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1168,
+        112
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "nDgXUShJQDuI2rzC",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "2aad8743-5c4e-41c1-a23a-57391b092230",
+      "name": "Merge Team",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        576,
+        0
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {},
+      "id": "63dee0be-68b0-470c-bb33-a44e50b3f79b",
+      "name": "Merge Student",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1392,
+        0
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\n \nconst student = items.find(\n  item => item.json.student_id !== null && item.json.student_id !== undefined\n);\n \nif (!student) {\n  throw new Error('No valid student_id found in Merge output');\n}\n \nreturn [\n  {\n    json: student.json\n  }\n];"
+      },
+      "id": "7216517a-0750-4e43-95c5-719873da08e1",
+      "name": "Get Selected Student",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1328,
+        320
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "mode": "combine",
+        "combineBy": "combineByPosition",
+        "options": {}
+      },
+      "id": "33026347-a0f5-4da0-ae68-63485def205f",
+      "name": "Merge Student & Team",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1696,
+        272
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\n \nconst team = items.find(\n  item => item.json.team_id !== null && item.json.team_id !== undefined\n);\n \nif (!team) {\n  throw new Error('No valid team_id found in Merge Team output');\n}\n \nreturn [\n  {\n    json: team.json\n  }\n];"
+      },
+      "id": "a510b4c5-f538-4d29-8ffa-9e15af4e1b25",
+      "name": "Get Selected Team",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        736,
+        176
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "50c414ba-f00a-412d-84c4-f575be3736a1",
+              "name": "review_id",
+              "value": "={{ $('Find Project Review').first().json.review_id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "1585d9b2-3c99-4bf4-89b0-b1c02a8fd101",
+      "name": "Use Existing Review",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        2336,
+        -160
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {},
+      "id": "40dd9107-211c-4e1e-9330-bae1f25a6741",
+      "name": "Merge Review Data",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        2592,
+        80
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "tableId": "project_reviews",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "team_id",
+              "fieldValue": "={{ $('Get Selected Team').first().json.team_id }}"
+            },
+            {
+              "fieldId": "review_type",
+              "fieldValue": "={{ $('Prepare Evaluation Result').first().json.review_type  }}"
+            },
+            {
+              "fieldId": "review_date",
+              "fieldValue": "={{ $('Prepare Evaluation Result').first().json.review_date }}"
+            }
+          ]
+        }
+      },
+      "id": "ec69fce7-c449-4a8a-aa98-f31c0e7e0dfd",
+      "name": "Create Project Review",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        2336,
+        96
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "nDgXUShJQDuI2rzC",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get ALL records directly from Find Review 2 Scores\nconst scores = $('Find Review 2 Scores').all();\n \n// Safety check\nif (scores.length === 0) {\n  return [\n    {\n      json: {\n        review_id: 2,\n        student_id: null,\n        number_of_scores: 0,\n        total_marks: 0,\n        max_marks: 40,\n        percentage: 0\n      }\n    }\n  ];\n}\n \n// Get student ID\nconst studentId = scores[0].json.student_id;\n \n// Calculate total of all Review 2 scores\nconst totalMarks = scores.reduce(\n  (total, item) => {\n    return total + Number(item.json.score || 0);\n  },\n  0\n);\n \n// Maximum marks for Review 2\nconst maxMarks = 40;\n \n// Calculate percentage\nconst percentage = (totalMarks / maxMarks) * 100;\n \n// Return result\nreturn [\n  {\n    json: {\n      review_id: 2,\n      student_id: studentId,\n      number_of_scores: scores.length,\n      total_marks: totalMarks,\n      max_marks: maxMarks,\n      percentage: Number(percentage.toFixed(2))\n    }\n  }\n];"
+      },
+      "id": "0a5943ef-a4e8-4035-9503-0677b2c29504",
+      "name": "Calculate Review 2 Results",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3952,
+        -128
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {},
+      "id": "9550744e-aa59-449e-a19d-45b9dd69a87e",
+      "name": "Merge1",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        4144,
+        32
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const scores = $('Find Review 1 Scores').all();\n \nif (scores.length === 0) {\n  return [\n    {\n      json: {\n        review_id: 1,\n        student_id: null,\n        total_marks: 0,\n        max_marks: 40,\n        percentage: 0\n      }\n    }\n  ];\n}\n \nconst studentId = scores[0].json.student_id;\n \nconst totalMarks = scores.reduce((total, item) => {\n  return total + Number(item.json.score || 0);\n}, 0);\n \nconst maxMarks = 40;\n \nconst percentage = (totalMarks / maxMarks) * 100;\n \nreturn [\n  {\n    json: {\n      review_id: 1,\n      student_id: studentId,\n      total_marks: totalMarks,\n      max_marks: maxMarks,\n      percentage: Number(percentage.toFixed(2))\n    }\n  }\n];"
+      },
+      "id": "785497d0-5cb0-4cbc-a756-4efb1af853d0",
+      "name": "Calculate Review 1 Results",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3856,
+        144
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "team_members",
+        "limit": 1,
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "team_id",
+              "condition": "eq",
+              "keyValue": "={{ $json.team_id }}"
+            },
+            {
+              "keyName": "student_id",
+              "condition": "eq",
+              "keyValue": "={{ $json.student_id }}"
+            }
+          ]
+        }
+      },
+      "id": "9134e2ce-cf6c-4009-a0f8-b841df62f925",
+      "name": "Find Team Member",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        816,
+        368
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "nDgXUShJQDuI2rzC",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "f7b1c2d3-9a10-4b21-8c33-5e6f7a8b9c01",
+              "leftValue": "={{ !!$('Find Team Member').first().json.team_id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "d6802e29-f9b7-435d-ad1d-6756c834d387",
+      "name": "Team Member Exists?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        1040,
+        32
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {},
+      "id": "063d683f-c5ca-47e9-8921-ea94aa2af6b1",
+      "name": "Merge Team Member",
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        1488,
+        192
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "tableId": "team_members",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "team_id",
+              "fieldValue": "={{ $('Get Selected Team').first().json.team_id }}"
+            },
+            {
+              "fieldId": "student_id",
+              "fieldValue": "={{ $('Get Selected Student').first().json.student_id }}"
+            },
+            {
+              "fieldId": "member_position",
+              "fieldValue": "1"
+            }
+          ]
+        }
+      },
+      "id": "7a5c605e-7640-473c-b1e4-58749c00a164",
+      "name": "Create Team Member",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1616,
+        0
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "nDgXUShJQDuI2rzC",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\n \nconst member = items.find(\n  item => item.json.team_id !== null && item.json.team_id !== undefined\n);\n \nif (!member) {\n  throw new Error('No valid team member found in Merge Team Member output');\n}\n \nreturn [\n  {\n    json: member.json\n  }\n];"
+      },
+      "id": "49de3465-652f-41df-bd55-49f1c519dbff",
+      "name": "Get Selected Team Member",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1712,
+        464
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "project_reviews",
+        "limit": 1,
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "team_id",
+              "condition": "eq",
+              "keyValue": "={{ $json.team_id }}"
+            },
+            {
+              "keyName": "review_type",
+              "condition": "eq",
+              "keyValue": "={{ $('Prepare Evaluation Result').first().json.review_type }}"
+            }
+          ]
+        }
+      },
+      "id": "7b613c66-169a-4c26-83ca-51babbfe0ca7",
+      "name": "Find Project Review",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        1840,
+        0
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "nDgXUShJQDuI2rzC",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "a1e8d7b5-4d05-42cb-a9ec-7bc4dbe6d000",
+              "leftValue": "={{ !!$('Find Project Review').first().json.review_id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "dfc314a4-f54d-460e-887a-943cdb93f659",
+      "name": "Review  Exists?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        2064,
+        0
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "jsCode": "const evaluation = $('Prepare Evaluation Result').first().json;\n \n// Review comes from either:\n// TRUE  → Use Existing Review\n// FALSE → Create Project Review\n// Merge outputs both branches' items, so pick the one that actually has a review_id.\nconst reviewItem = $('Merge Review Data').all().find(i => i.json && i.json.review_id != null);\nconst review = reviewItem ? reviewItem.json : {};\n \n// Student comes from:\n// Get Selected Team Member\nconst student = $('Get Selected Team Member').first().json;\n \n// Validate Review ID\nif (!review?.review_id) {\n  throw new Error('Review ID not found from Merge Review Data');\n}\n \n// Validate Student ID\nif (!student?.student_id) {\n  throw new Error('Student ID not found from Create Team Member');\n}\n \n// Validate evaluation scores\nif (!evaluation?.scores || !Array.isArray(evaluation.scores)) {\n  throw new Error('Evaluation scores not found from Prepare Evaluation Result');\n}\n \n// Prepare one record for each criterion score\nreturn evaluation.scores.map(item => ({\n  json: {\n    review_id: review.review_id,\n    student_id: student.student_id,\n    criterion_id: item.criterion_id,\n    score: item.score\n  }\n}));"
+      },
+      "id": "d1d45f58-b2f4-4f62-9a86-a0ab192bc7c8",
+      "name": "Prepare Review Scores",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2832,
+        16
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "tableId": "review_scores",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "review_id",
+              "fieldValue": "={{ $json.review_id }}"
+            },
+            {
+              "fieldId": "student_id",
+              "fieldValue": "={{ $json.student_id }}"
+            },
+            {
+              "fieldId": "criterion_id",
+              "fieldValue": "={{ $json.criterion_id }}"
+            },
+            {
+              "fieldId": "score",
+              "fieldValue": "={{ $json.score }}"
+            }
+          ]
+        }
+      },
+      "id": "2b0cda14-755a-4d1d-8d09-051ba1d591a4",
+      "name": "Save Review  Scores",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        3056,
+        16
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "nDgXUShJQDuI2rzC",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\n \nconst first = items[0].json;\n \nconst reviewId = first.review_id;\nconst studentId = first.student_id;\n \nconst totalMarks = items.reduce((sum, item) => {\n  return sum + Number(item.json.score || 0);\n}, 0);\n \nconst maxMarks = items.length * 4;\n \nconst percentage = (totalMarks / maxMarks) * 100;\n \nreturn [\n  {\n    json: {\n      review_id: reviewId,\n      student_id: studentId,\n      total_marks: totalMarks,\n      max_marks: maxMarks,\n      percentage: Number(percentage.toFixed(2))\n    }\n  }\n];"
+      },
+      "id": "8312bba4-718c-42b5-82c2-f96a952528b3",
+      "name": "Calculate Review Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        3280,
+        16
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "project_reviews",
+        "limit": 1,
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "team_id",
+              "condition": "eq",
+              "keyValue": "={{ $('Get Selected Team Member').first().json.team_id }}"
+            },
+            {
+              "keyName": "review_type",
+              "condition": "eq",
+              "keyValue": "REVIEW_2"
+            }
+          ]
+        }
+      },
+      "id": "2be6dcc3-f352-4a84-8fb0-9461316231ed",
+      "name": "Find Review 2 Project Review",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        3520,
+        -128
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "nDgXUShJQDuI2rzC",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "review_scores",
+        "returnAll": true,
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "student_id",
+              "condition": "eq",
+              "keyValue": "={{ $('Calculate Review Result').first().json.student_id }}"
+            },
+            {
+              "keyName": "review_id",
+              "condition": "eq",
+              "keyValue": "={{ $('Find Review 2 Project Review').first().json.review_id ?? -1 }}"
+            }
+          ]
+        }
+      },
+      "id": "e19b7841-ec15-47f2-80af-b41e7f74fe05",
+      "name": "Find Review 2 Scores",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        3728,
+        -128
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "nDgXUShJQDuI2rzC",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "review_scores",
+        "returnAll": true,
+        "matchType": "allFilters",
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "student_id",
+              "condition": "eq",
+              "keyValue": "={{ $('Calculate Review Result').first().json.student_id }}"
+            },
+            {
+              "keyName": "review_id",
+              "condition": "eq",
+              "keyValue": "={{ $('Calculate Review Result').first().json.review_id }}"
+            }
+          ]
+        }
+      },
+      "id": "036cd0f0-c4ab-4531-815b-f7261b0d9a20",
+      "name": "Find Review 1 Scores",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        3600,
+        144
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "nDgXUShJQDuI2rzC",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get Review 1 result directly\nconst review1 = $('Calculate Review 1 Results').first()?.json;\n \n// Get Review 2 result directly\nconst review2 = $('Calculate Review 2 Results').first()?.json;\n \n \n// Get student ID (fall back to the authoritative student from Get Selected Student\n// when the review-score read-backs are empty, so it is never null)\nconst studentId =\n  review1?.student_id ??\n  review2?.student_id ??\n  $('Get Selected Student').first().json.student_id ??\n  null;\n \n \n// Get Review 1 marks\nconst review1Marks = Number(\n  review1?.total_marks ?? 0\n);\n \n \n// Get Review 2 marks\nconst review2Marks = Number(\n  review2?.total_marks ?? 0\n);\n \n \n// Maximum marks\nconst review1MaxMarks = 40;\nconst review2MaxMarks = 40;\n \n \n// Calculate cumulative marks\nconst cumulativeMarks =\n  review1Marks + review2Marks;\n \n \n// Maximum cumulative marks\nconst cumulativeMaxMarks =\n  review1MaxMarks + review2MaxMarks;\n \n \n// Calculate percentage\nconst percentage =\n  (cumulativeMarks / cumulativeMaxMarks) * 100;\n \n \n// Return final result\nreturn [\n  {\n    json: {\n      student_id: studentId,\n \n      review_1_marks: review1Marks,\n      review_1_max_marks: review1MaxMarks,\n \n      review_2_marks: review2Marks,\n      review_2_max_marks: review2MaxMarks,\n \n      cumulative_marks: cumulativeMarks,\n      cumulative_max_marks: cumulativeMaxMarks,\n \n      percentage: Number(\n        percentage.toFixed(2)\n      )\n    }\n  }\n];"
+      },
+      "id": "3b620297-0219-42d9-babb-0d8a6940a740",
+      "name": "Calculate Cumulative Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4352,
+        32
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "evaluation_criteria",
+        "returnAll": true
+      },
+      "id": "938677fc-a7ed-4a7d-be3a-39ac2024a190",
+      "name": "Get Evaluation Criteria1",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        4576,
+        32
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "nDgXUShJQDuI2rzC",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// ==========================================\n// GET DATA FROM PREVIOUS NODES\n// ==========================================\n \nconst criteria = $('Get Evaluation Criteria1').all();\n \nconst review1Scores = $('Find Review 1 Scores').all();\n \nconst review2Scores = $('Find Review 2 Scores').all();\n \nconst cumulative = $('Calculate Cumulative Result').first().json;\n \n \n// ==========================================\n// REVIEW 1 CRITERIA\n// ==========================================\n \nconst review1Criteria = criteria\n  .filter(item =>\n    String(item.json.review_type).trim().toUpperCase() === 'REVIEW_1'\n  )\n  .map(item => {\n \n    const criterion = item.json;\n \n    const scoreRecord = review1Scores.find(\n      score =>\n        Number(score.json.criterion_id) ===\n        Number(criterion.criterion_no)\n    );\n \n    return {\n      criterion_no: Number(criterion.criterion_no),\n      criterion_id: Number(criterion.criterion_id),\n      criterion_title: criterion.criterion_title,\n      co: criterion.co,\n      description: criterion.description,\n \n      score: scoreRecord\n        ? Number(scoreRecord.json.score)\n        : 0,\n \n      max_score: Number(criterion.max_score || 4),\n \n      remarks: scoreRecord?.json?.remarks || null\n    };\n  });\n \n \n// ==========================================\n// REVIEW 2 CRITERIA\n// ==========================================\n \nconst review2Criteria = criteria\n  .filter(item =>\n    String(item.json.review_type).trim().toUpperCase() === 'REVIEW_2'\n  )\n  .map(item => {\n \n    const criterion = item.json;\n \n    const scoreRecord = review2Scores.find(\n      score =>\n        Number(score.json.criterion_id) ===\n        Number(criterion.criterion_no)\n    );\n \n    return {\n      criterion_no: Number(criterion.criterion_no),\n      criterion_id: Number(criterion.criterion_id),\n      criterion_title: criterion.criterion_title,\n      co: criterion.co,\n      description: criterion.description,\n \n      score: scoreRecord\n        ? Number(scoreRecord.json.score)\n        : 0,\n \n      max_score: Number(criterion.max_score || 4),\n \n      remarks: scoreRecord?.json?.remarks || null\n    };\n  });\n \n \n// ==========================================\n// FINAL AI REPORT DATA\n// ==========================================\n \nreturn [\n  {\n    json: {\n \n      student_id: cumulative.student_id,\n \n      // --------------------------------------\n      // REVIEW 1\n      // --------------------------------------\n \n      review_1: {\n        total_marks: cumulative.review_1_marks,\n        max_marks: cumulative.review_1_max_marks,\n \n        percentage:\n          Number(\n            (\n              cumulative.review_1_marks /\n              cumulative.review_1_max_marks\n            ) * 100\n          ).toFixed(2),\n \n        criteria: review1Criteria\n      },\n \n \n      // --------------------------------------\n      // REVIEW 2\n      // --------------------------------------\n \n      review_2: {\n        total_marks: cumulative.review_2_marks,\n        max_marks: cumulative.review_2_max_marks,\n \n        percentage:\n          Number(\n            (\n              cumulative.review_2_marks /\n              cumulative.review_2_max_marks\n            ) * 100\n          ).toFixed(2),\n \n        criteria: review2Criteria\n      },\n \n \n      // --------------------------------------\n      // CUMULATIVE RESULT\n      // --------------------------------------\n \n      cumulative_result: {\n        total_marks: cumulative.cumulative_marks,\n        max_marks: cumulative.cumulative_max_marks,\n        percentage: cumulative.percentage\n      }\n \n    }\n  }\n];"
+      },
+      "id": "3d279b88-c2b0-4fb9-a344-f2dd6b072062",
+      "name": "Get Evaluation Criteria3",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        4800,
+        32
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "students",
+        "limit": 1,
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "student_id",
+              "condition": "eq",
+              "keyValue": "={{ $json.student_id }}"
+            }
+          ]
+        }
+      },
+      "id": "0f6443f3-5153-46ec-80a9-55ca00fdd431",
+      "name": "Get Student Details",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        5024,
+        32
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "nDgXUShJQDuI2rzC",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "team_members",
+        "limit": 1,
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "student_id",
+              "condition": "eq",
+              "keyValue": "={{ $('Get Student Details').first().json.student_id }}"
+            }
+          ]
+        }
+      },
+      "id": "97ce9d94-6a47-4729-a349-064ae8163dcc",
+      "name": "Get Team Membership",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        5248,
+        32
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "nDgXUShJQDuI2rzC",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "getAll",
+        "tableId": "project_teams",
+        "limit": 1,
+        "filters": {
+          "conditions": [
+            {
+              "keyName": "team_id",
+              "condition": "eq",
+              "keyValue": "={{ $('Get Team Membership').first().json.team_id }}"
+            }
+          ]
+        }
+      },
+      "id": "ab8213d0-c673-402f-95e6-748edf10b878",
+      "name": "Get Project Details",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        5472,
+        32
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "nDgXUShJQDuI2rzC",
+          "name": "Supabase account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "// Get Student Details\nconst student = $('Get Student Details').first().json;\n \n// Get Team Membership\nconst membership = $('Get Team Membership').first().json;\n \n// Get Project Details\nconst project = $('Get Project Details').first().json;\n \n// Get complete Review + Cumulative data\nconst report = $('Get Evaluation Criteria3').first().json;\n \n \n// Build final report data\nreturn [\n  {\n    json: {\n      // -------------------------\n      // STUDENT DETAILS\n      // -------------------------\n      student: {\n        student_id: student.student_id,\n        student_name: student.student_name,\n        roll_no: student.roll_no,\n        email: student.email,\n        phone: student.phone\n      },\n \n      // -------------------------\n      // TEAM / PROJECT DETAILS\n      // -------------------------\n      project: {\n        team_id: project.team_id,\n        team_number: project.team_number,\n        project_title: project.project_title,\n        supervisor_id: project.supervisor_id\n      },\n \n      // -------------------------\n      // REVIEW 1\n      // -------------------------\n      review_1: report.review_1,\n \n      // -------------------------\n      // REVIEW 2\n      // -------------------------\n      review_2: report.review_2,\n \n      // -------------------------\n      // CUMULATIVE RESULT\n      // -------------------------\n      cumulative_result: report.cumulative_result\n    }\n  }\n];"
+      },
+      "id": "3da5357d-4a90-4996-a81a-3699b5af65ca",
+      "name": "Prepare Final Report Data",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        5696,
+        32
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=Generate a professional academic mini project evaluation report using the following student evaluation data.\n \nStudent and project information:\n{{ JSON.stringify($json, null, 2) }}\n \nUse all the information provided above.",
+        "options": {
+          "systemMessage": "You are a helpful assistantWhen analyzing performance, base every observation strictly on the numerical scores.\n \nScore interpretation:\n4 = Very Good\n3 = Good\n2 = Satisfactory\n1 = Needs Improvement\n \nDo not describe a score of 3 as \"excellent\" or \"strong\" unless supported by the score scale.\n \nDo not call a score of 2 \"poor\" or \"significant weakness\". Describe it as \"Satisfactory\" and identify it as an area that can be improved.\n \nDo not claim specific technical weaknesses unless they are directly supported by the criterion score or remarks.\n \nIMPORTANT REPORT RULES:\n \n1. Use only the student, project, Review-1 and Review-2 data provided.\n2. Do not invent any information.\n3. Do not assume technical strengths or weaknesses that are not directly supported by the scores or remarks.\n4. For every criterion, use this exact score interpretation:\n   4 = Very Good\n   3 = Good\n   2 = Satisfactory\n   1 = Needs Improvement\n5. Mention strengths only when supported by higher scores.\n6. Mention improvement areas only when supported by lower scores or remarks.\n7. Do not use words such as \"excellent\", \"poor\", \"weak\", \"strong\", or \"significant weakness\" unless explicitly supported by the evaluation data.\n8. The cumulative result must be calculated as:\n   Review-1 marks + Review-2 marks\n   and maximum marks = 80.\n9. Do not change any marks or percentages supplied in the input.\n10. Clearly separate Review-1, Review-2 and Cumulative Result."
+        }
+      },
+      "id": "f23ab83b-0ca1-4360-9daf-4364676698ef",
+      "name": "Prepare Report Output",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        5936,
+        32
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-5-mini"
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "id": "833f890a-76d3-4d77-b3bb-4342f09fbbae",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        5808,
+        240
+      ],
+      "credentials": {
+        "openAiApi": {
+          "id": null,
+          "name": "",
+          "__aiGatewayManaged": true
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const ai = $input.first().json;\n \nconst report = ai.output || \"\";\n \nconst source = $('Prepare Final Report Data').first().json;\n \nreturn [\n  {\n    json: {\n      student_id: source.student.student_id,\n      student_name: source.student.student_name,\n      roll_no: source.student.roll_no,\n      email: source.student.email,\n \n      team_id: source.project.team_id,\n      team_number: source.project.team_number,\n      project_title: source.project.project_title,\n \n      review_1_marks: source.review_1.total_marks,\n      review_1_max_marks: source.review_1.max_marks,\n      review_1_percentage: source.review_1.percentage,\n \n      review_2_marks: source.review_2.total_marks,\n      review_2_max_marks: source.review_2.max_marks,\n      review_2_percentage: source.review_2.percentage,\n \n      cumulative_marks: source.cumulative_result.total_marks,\n      cumulative_max_marks: source.cumulative_result.max_marks,\n      cumulative_percentage: source.cumulative_result.percentage,\n \n      ai_report: report\n    }\n  }\n];"
+      },
+      "id": "0db9d5d0-640d-4972-a7fd-a479d92c5c27",
+      "name": "Prepare Report Output1",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        6304,
+        32
+      ],
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "tableId": "ai_evaluation_reports",
+        "fieldsUi": {
+          "fieldValues": [
+            {
+              "fieldId": "student_id",
+              "fieldValue": "={{ $json.student_id  }}"
+            },
+            {
+              "fieldId": "team_id",
+              "fieldValue": "={{ $json.team_id }}"
+            },
+            {
+              "fieldId": "student_name",
+              "fieldValue": "={{ $json.student_name }}"
+            },
+            {
+              "fieldId": "roll_no",
+              "fieldValue": "={{ $json.roll_no }}"
+            },
+            {
+              "fieldId": "team_number",
+              "fieldValue": "={{ $json.team_number }}"
+            },
+            {
+              "fieldId": "project_title",
+              "fieldValue": "={{ $json.project_title }}"
+            },
+            {
+              "fieldId": "review_1_marks",
+              "fieldValue": "={{ $json.review_1_marks }}"
+            },
+            {
+              "fieldId": "review_1_max_marks",
+              "fieldValue": "={{ $json.review_1_max_marks }}"
+            },
+            {
+              "fieldId": "review_1_percentage",
+              "fieldValue": "={{ $json.review_1_percentage }}"
+            },
+            {
+              "fieldId": "review_2_marks",
+              "fieldValue": "={{ $json.review_2_marks }}"
+            },
+            {
+              "fieldId": "review_2_max_marks",
+              "fieldValue": "={{ $json.review_2_max_marks }}"
+            },
+            {
+              "fieldId": "review_2_percentage",
+              "fieldValue": "={{ $json.review_2_percentage  }}"
+            },
+            {
+              "fieldId": "cumulative_marks",
+              "fieldValue": "={{ $json.cumulative_marks }}"
+            },
+            {
+              "fieldId": "cumulative_max_marks",
+              "fieldValue": "={{ $json.cumulative_max_marks  }}"
+            },
+            {
+              "fieldId": "cumulative_percentage",
+              "fieldValue": "={{ $json.cumulative_percentage  }}"
+            },
+            {
+              "fieldId": "ai_report",
+              "fieldValue": "={{ $json.ai_report }}"
+            }
+          ]
+        }
+      },
+      "id": "6fe5c2d8-7b84-47f8-8e53-aab0c7687b89",
+      "name": "Save AI Report",
+      "type": "n8n-nodes-base.supabase",
+      "typeVersion": 1,
+      "position": [
+        6528,
+        32
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "supabaseApi": {
+          "id": "nDgXUShJQDuI2rzC",
+          "name": "Supabase account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Student & Review Details": {
+      "main": [
+        [
+          {
+            "node": "Get Evaluation Criteria",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Find Student",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Evaluation Criteria": {
+      "main": [
+        [
+          {
+            "node": "Prepare Criteria",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Criteria": {
+      "main": [
+        [
+          {
+            "node": "Evaluation Form",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Evaluation Form": {
+      "main": [
+        [
+          {
+            "node": "Prepare Evaluation Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Evaluation Result": {
+      "main": [
+        [
+          {
+            "node": "Find team",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find team": {
+      "main": [
+        [
+          {
+            "node": "Team Exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Team Exists?": {
+      "main": [
+        [
+          {
+            "node": "Use Existing Team",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create Team",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Use Existing Team": {
+      "main": [
+        [
+          {
+            "node": "Merge Team",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Team": {
+      "main": [
+        [
+          {
+            "node": "Merge Team",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Find Student": {
+      "main": [
+        [
+          {
+            "node": "Student Exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Student Exists?": {
+      "main": [
+        [
+          {
+            "node": "Use Existing Student",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create Student",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Use Existing Student": {
+      "main": [
+        [
+          {
+            "node": "Merge Student",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Student": {
+      "main": [
+        [
+          {
+            "node": "Merge Student",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Merge Team": {
+      "main": [
+        [
+          {
+            "node": "Get Selected Team",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Student": {
+      "main": [
+        [
+          {
+            "node": "Get Selected Student",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Selected Student": {
+      "main": [
+        [
+          {
+            "node": "Merge Student & Team",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Student & Team": {
+      "main": [
+        [
+          {
+            "node": "Find Team Member",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Selected Team": {
+      "main": [
+        [
+          {
+            "node": "Merge Student & Team",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Use Existing Review": {
+      "main": [
+        [
+          {
+            "node": "Merge Review Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Review Data": {
+      "main": [
+        [
+          {
+            "node": "Prepare Review Scores",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Project Review": {
+      "main": [
+        [
+          {
+            "node": "Merge Review Data",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Calculate Review 2 Results": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge1": {
+      "main": [
+        [
+          {
+            "node": "Calculate Cumulative Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Review 1 Results": {
+      "main": [
+        [
+          {
+            "node": "Merge1",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Find Team Member": {
+      "main": [
+        [
+          {
+            "node": "Team Member Exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Team Member Exists?": {
+      "main": [
+        [
+          {
+            "node": "Merge Team Member",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create Team Member",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge Team Member": {
+      "main": [
+        [
+          {
+            "node": "Get Selected Team Member",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Team Member": {
+      "main": [
+        [
+          {
+            "node": "Merge Team Member",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "Get Selected Team Member": {
+      "main": [
+        [
+          {
+            "node": "Find Project Review",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find Project Review": {
+      "main": [
+        [
+          {
+            "node": "Review  Exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Review  Exists?": {
+      "main": [
+        [
+          {
+            "node": "Use Existing Review",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create Project Review",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Review Scores": {
+      "main": [
+        [
+          {
+            "node": "Save Review  Scores",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Review  Scores": {
+      "main": [
+        [
+          {
+            "node": "Calculate Review Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Review Result": {
+      "main": [
+        [
+          {
+            "node": "Find Review 2 Project Review",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Find Review 1 Scores",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find Review 2 Project Review": {
+      "main": [
+        [
+          {
+            "node": "Find Review 2 Scores",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find Review 2 Scores": {
+      "main": [
+        [
+          {
+            "node": "Calculate Review 2 Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Find Review 1 Scores": {
+      "main": [
+        [
+          {
+            "node": "Calculate Review 1 Results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calculate Cumulative Result": {
+      "main": [
+        [
+          {
+            "node": "Get Evaluation Criteria1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Evaluation Criteria1": {
+      "main": [
+        [
+          {
+            "node": "Get Evaluation Criteria3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Evaluation Criteria3": {
+      "main": [
+        [
+          {
+            "node": "Get Student Details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Student Details": {
+      "main": [
+        [
+          {
+            "node": "Get Team Membership",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Team Membership": {
+      "main": [
+        [
+          {
+            "node": "Get Project Details",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Project Details": {
+      "main": [
+        [
+          {
+            "node": "Prepare Final Report Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Final Report Data": {
+      "main": [
+        [
+          {
+            "node": "Prepare Report Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Report Output": {
+      "main": [
+        [
+          {
+            "node": "Prepare Report Output1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Prepare Report Output",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Report Output1": {
+      "main": [
+        [
+          {
+            "node": "Save AI Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "19db0060-b14b-4f9a-931f-d7374af70476",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "6424b03415b1ade379fe75597c510a4422bc218a07371cb1062a30582eaf4a63"
+  },
+  "nodeGroups": [],
+  "id": "nZaAPYXeiug57nyT",
+  "tags": []
+}
